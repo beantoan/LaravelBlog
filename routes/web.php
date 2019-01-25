@@ -23,4 +23,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('posts', 'PostController')->except([
         'destroy'
     ]);
+
+    Route::post('comments/{postId}', 'CommentController@store')->name('comments.store');
 });

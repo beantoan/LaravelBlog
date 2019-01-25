@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class PostController extends Controller
 {
@@ -38,12 +40,22 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        Log::debug($request, [PostController::class, 'store()', '$request']);
+
         $request->validate([
             'title' => 'required',
             'content' => 'required',
         ]);
 
-        Post::create($request->all());
+        $postData = [
+            'title' => $request->get('title'),
+            'content' => $request->get('content'),
+            'user_id' => Auth::id()
+        ];
+
+        Log::debug($postData, [PostController::class, 'store()', '$postData']);
+
+        Post::create($postData);
 
         return redirect()->route('posts.index')
             ->with('success', 'Post is created successfully.');
@@ -80,6 +92,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        Log::debug($request, [PostController::class, 'update()']);
 
         $request->validate([
             'title' => 'required',
