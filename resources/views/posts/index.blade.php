@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Posts')
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -28,14 +30,14 @@
                             <th>Content</th>
                             <th>Creator</th>
                             <th>Created At</th>
-                            <th width="280px">Action</th>
+                            <th>Action</th>
                         </tr>
 
                         @foreach ($posts as $post)
                             <tr>
                                 <td>{{ ++$i }}</td>
                                 <td>{{ $post->title }}</td>
-                                <td>{{ $post->content }}</td>
+                                <td>{{ Str::words($post->content, 10) }}</td>
                                 <td>{{ $post->user->name }}</td>
                                 <td>{{ date('H:i:s d M Y', $post->created_at->timestamp) }}</td>
                                 <td>
