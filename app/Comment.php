@@ -14,8 +14,7 @@ class Comment extends Model
     public $counterCacheOptions = [
         'Post' => [
             'field' => 'comments_count',
-            'foreignKey' => 'post_id',
-            'filter' => 'commentValidatedFilter'
+            'foreignKey' => 'post_id'
         ]
     ];
 
@@ -25,13 +24,5 @@ class Comment extends Model
 
     public function post() {
         return $this->belongsTo(Post::class);
-    }
-
-    public function commentValidatedFilter() {
-        if ($this->validated) {
-            return true;
-        }
-
-        return false;
     }
 }

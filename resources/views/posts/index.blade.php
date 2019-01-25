@@ -28,6 +28,7 @@
                             <th>#</th>
                             <th>Title</th>
                             <th>Content</th>
+                            <th># Comments</th>
                             <th>Creator</th>
                             <th>Created At</th>
                             <th>Action</th>
@@ -38,6 +39,7 @@
                                 <td>{{ ++$i }}</td>
                                 <td>{{ $post->title }}</td>
                                 <td>{{ Str::words($post->content, 10) }}</td>
+                                <td>{{ $post->comments_count }}</td>
                                 <td>{{ $post->user->name }}</td>
                                 <td>{{ date('H:i:s d M Y', $post->created_at->timestamp) }}</td>
                                 <td>
